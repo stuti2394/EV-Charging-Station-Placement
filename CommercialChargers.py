@@ -76,7 +76,7 @@ def cluster_and_divide(coordinates, n_clusters=50, min_cluster_size=10, subclust
                 for sub_label, sub_centroid in enumerate(sub_centroids):
                     subcluster_points = points[sub_labels == sub_label]
                     
-                    if len(subcluster_points) < min_cluster_size:  # New condition
+                    if len(subcluster_points) < min_cluster_size:
                         continue  # Skip subclusters below minimum size
                     
                     new_centroids.append(sub_centroid)
