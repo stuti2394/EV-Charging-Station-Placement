@@ -23,20 +23,6 @@ def haversine_distance_km(coord1, coord2):
     return haversine_distances([coord1], [coord2])[0][0] * 6371  # Earth's radius in km
 
 def cluster_and_divide(coordinates, n_clusters=50, min_cluster_size=15, subcluster_radius=10):
-    """
-    Clusters geographical coordinates using K-Means and divides large clusters if needed.
-
-    Parameters:
-    - coordinates: numpy array of shape (n, 2) with latitude and longitude values.
-    - n_clusters: Initial number of clusters.
-    - min_cluster_size: Minimum size for a cluster to be considered valid.
-    - subcluster_radius: Maximum radius (in km) before a cluster is divided further.
-
-    Returns:
-    - final_labels: Cluster labels for each coordinate.
-    - new_centroids: Array of cluster centroids.
-    """
-
     n_samples = coordinates.shape[0]
     n_clusters = min(n_clusters, n_samples)  # Ensure clusters don't exceed data points
 
@@ -76,7 +62,7 @@ def cluster_and_divide(coordinates, n_clusters=50, min_cluster_size=15, subclust
                 for sub_label, sub_centroid in enumerate(sub_centroids):
                     subcluster_points = points[sub_labels == sub_label]
                     
-                    if len(subcluster_points) < min_cluster_size:  # New condition
+                    if len(subcluster_points) < min_cluster_size:
                         continue  # Skip subclusters below minimum size
                     
                     new_centroids.append(sub_centroid)
